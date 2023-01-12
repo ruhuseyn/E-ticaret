@@ -25,9 +25,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUser());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserByiD(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+    @GetMapping("/{mail}")
+    public ResponseEntity<UserDto> getUserByiD(@PathVariable("mail") String mail) {
+        return ResponseEntity.ok(userService.getUserById(mail));
     }
 
     @PostMapping
@@ -35,22 +35,22 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(userRequest));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{mail}")
     public ResponseEntity<UserDto> updateUser(
-            @PathVariable Long id,
+            @PathVariable String mail,
             @RequestBody UpdateUserRequest updateUserRequest){
-        return ResponseEntity.ok(userService.updateUser(id,updateUserRequest));
+        return ResponseEntity.ok(userService.updateUser(mail,updateUserRequest));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> deactiveUser(@PathVariable("id") Long id){
-        userService.deactiveUser(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
-        userService.deleteUser(id);
-        return ResponseEntity.ok().build();
-    }
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<Void> deactiveUser(@PathVariable("id") Long id){
+//        userService.deactiveUser(id);
+//        return ResponseEntity.ok().build();
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
+//        userService.deleteUser(id);
+//        return ResponseEntity.ok().build();
+//    }
 }
