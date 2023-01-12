@@ -26,18 +26,20 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<User>> getUser(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(userService.getUser(id));
+    public ResponseEntity<UserDto> getUserByiD(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody CreateUserRequest userRequest){
-        return ResponseEntity.ok(userService.createUser(use rRequest));
+    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest userRequest){
+        return ResponseEntity.ok(userService.createUser(userRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody UpdateUserRequest updateUserRequest){
-        return ResponseEntity.ok(userService.updateUser(updateUserRequest));
+    public ResponseEntity<UserDto> updateUser(
+            @PathVariable Long id,
+            @RequestBody UpdateUserRequest updateUserRequest){
+        return ResponseEntity.ok(userService.updateUser(id,updateUserRequest));
     }
 
     @PatchMapping("/{id}")
