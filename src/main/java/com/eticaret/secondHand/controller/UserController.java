@@ -3,7 +3,7 @@ package com.eticaret.secondHand.controller;
 import com.eticaret.secondHand.dto.CreateUserRequest;
 import com.eticaret.secondHand.dto.UpdateUserRequest;
 import com.eticaret.secondHand.dto.UserDto;
-import com.eticaret.secondHand.model.User;
+import com.eticaret.secondHand.exception.UserNotActiveException;
 import com.eticaret.secondHand.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,19 +38,24 @@ public class UserController {
     @PutMapping("/{mail}")
     public ResponseEntity<UserDto> updateUser(
             @PathVariable String mail,
-            @RequestBody UpdateUserRequest updateUserRequest){
+            @RequestBody UpdateUserRequest updateUserRequest) throws UserNotActiveException {
         return ResponseEntity.ok(userService.updateUser(mail,updateUserRequest));
     }
 
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<Void> deactiveUser(@PathVariable("id") Long id){
-//        userService.deactiveUser(id);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
-//        userService.deleteUser(id);
-//        return ResponseEntity.ok().build();
-//    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> deactiveUser(@PathVariable("id") Long id){
+        userService.deactiveUser(id);
+        return ResponseEntity.ok().build();
+    }
+    @PatchMapping("/{id}/active")
+    public ResponseEntity<Void> activeUser(@PathVariable("id") Long id){
+        userService.activeUser(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
 }

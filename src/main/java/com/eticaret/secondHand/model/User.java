@@ -15,52 +15,53 @@ public class User {
     private String firstName;
     private String lastName;
     private String middleName;
+    private Boolean isActive;
 
-    public User(Long id, String mail, String firstName, String lastName, String middleName) {
+    public User(Long id, String mail, String firstName, String lastName, String middleName, Boolean isActive) {
         this.id = id;
+        this.mail = mail;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.isActive = isActive;
+    }
+    public User(String mail, String firstName, String lastName, String middleName, Boolean isActive) {
+        this.mail = mail;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.isActive = isActive;
+    }
+    public User(Long id, String mail, String firstName, String lastName, String middleName) {
         this.mail = mail;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
     }
 
+
+
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getMail() {
         return mail;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getMiddleName() {
         return middleName;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public Boolean getActive() {
+        return isActive;
     }
 }
