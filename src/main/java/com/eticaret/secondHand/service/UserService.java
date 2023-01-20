@@ -49,7 +49,7 @@ public class UserService {
     public UserDto updateUser(String mail, UpdateUserRequest updateUserRequest) throws UserNotActiveException {
         User user = findUserByMail(mail);
         if (!user.getActive()) {
-            logger.warning("User wanted update is not active!");
+            logger.warning(String.format("User wanted update is not active, user mail: %s",mail));
             throw new UserNotActiveException();
         }
         User updatedUser = new User(user.getId(),
