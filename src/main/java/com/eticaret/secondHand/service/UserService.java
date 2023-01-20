@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final UserDtoConverter userDtoConverter;
@@ -59,6 +59,34 @@ public class UserService {
                 user.getMiddleName());
         return userDtoConverter.convert(updatedUser);
     }
+    public void deactivateUser(Long id) {
+        changeActivate(id,false);
+    }
+
+    public void activeUser(Long id) {
+        changeActivate(id,true);
+    }
+
+
+    public void deleteUser(Long id) {
+        if (doesUserExist(id)) {
+            userRepository.deleteById(id);
+        }else{
+            new UserNotFoundException("User couldn't be found following id: " + id);
+        }
+    }
+
+    private void changeActivate(Long id, Boolean isActive){
+        User user = findUserById(id);
+
+        User updatedUser = new User(user.getId(),
+                user.getMail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getMiddleName(),
+                isActive);
+        userRepository.save(updatedUser);
+    }
 
     private User findUserById(Long id) {
         return userRepository.findById(id).
@@ -70,10 +98,8 @@ public class UserService {
                 orElseThrow(() -> new UserNotFoundException("User couldn't be found following mail: " + mail));
     }
 
-    public void deactiveUser(Long id) {
-    }
-
-    public void activeUser(Long id) {
+    private boolean doesUserExist(Long id){
+        return userRepository.existsById(id);
     }
 }
 
