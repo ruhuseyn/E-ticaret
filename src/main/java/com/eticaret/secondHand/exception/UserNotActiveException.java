@@ -9,7 +9,7 @@ public class UserNotActiveException extends Throwable {
     private static final String message  = "User wanted update is not active!";
 
     public UserNotActiveException() {
-        super(this.message);
+        super(message);
     }
 
     public UserNotActiveException(String message) {

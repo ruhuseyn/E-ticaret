@@ -1,10 +1,8 @@
 package com.eticaret.secondHand.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class User {
 
     @Id
@@ -16,6 +14,9 @@ public class User {
     private String lastName;
     private String middleName;
     private Boolean isActive;
+
+    public User() {
+    }
 
     public User(Long id, String mail, String firstName, String lastName, String middleName, Boolean isActive) {
         this.id = id;

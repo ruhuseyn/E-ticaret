@@ -8,11 +8,11 @@ import com.eticaret.secondHand.exception.UserNotActiveException;
 import com.eticaret.secondHand.exception.UserNotFoundException;
 import com.eticaret.secondHand.model.User;
 import com.eticaret.secondHand.repository.UserRepository;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,7 +49,7 @@ public class UserService {
     public UserDto updateUser(String mail, UpdateUserRequest updateUserRequest) throws UserNotActiveException {
         User user = findUserByMail(mail);
         if (!user.getActive()) {
-            logger.warning(String.format("User wanted update is not active, user mail: %s",mail));
+            logger.warn(String.format("User wanted update is not active, user mail: %s",mail));
             throw new UserNotActiveException();
         }
         User updatedUser = new User(user.getId(),
